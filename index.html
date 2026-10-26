@@ -270,8 +270,8 @@ body:has(.detail-overlay:not([hidden])) .live-mini-preview,body:has(.batch-selec
 
 @media(max-width:767px){
  #watermarkWorkspace main{flex:0 0 auto!important;min-height:0!important;height:auto!important}
- #watermarkWorkspace #stage:not(.compact-sticky-stage){flex:0 0 auto!important;min-height:0!important;height:auto!important;overflow:hidden!important;padding:10px 8px!important}
- #watermarkWorkspace #stage:not(.compact-sticky-stage) #preview:not([hidden]){display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:52dvh!important;object-fit:contain!important;margin:auto!important;touch-action:none!important}
+ #watermarkWorkspace #stage:not(.compact-sticky-stage){flex:0 0 auto!important;min-height:50dvh!important;height:50dvh!important;max-height:50dvh!important;overflow:hidden!important;padding:10px 8px!important;display:flex!important;align-items:center!important;justify-content:center!important;box-sizing:border-box!important}
+ #watermarkWorkspace #stage:not(.compact-sticky-stage) #preview:not([hidden]){display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height:calc(50dvh - 20px)!important;object-fit:contain!important;margin:auto!important;touch-action:none!important}
  #watermarkWorkspace #stage.compact-sticky-stage #preview{touch-action:none!important}
 
  .watermark-drag-switch{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:5px 10px 9px}
@@ -296,6 +296,68 @@ body:has(.detail-overlay:not([hidden])) .live-mini-preview,body:has(.batch-selec
 @media(max-width:767px){
  /* Keep only the docked preview's footprint; never reserve the old full-size image height. */
  #combineWorkspace .stage-sticky-placeholder.grid-scroll-anchor:not([hidden]){height:112px!important;min-height:112px!important;overflow-anchor:none!important}
+}
+</style><style>
+/* Mobile watermark preview: reserve an actual half-viewport editing surface.
+   Do not force the image to fill both axes: its original aspect ratio is preserved. */
+@media (max-width:767px){
+  #watermarkWorkspace:not([hidden]) > main{display:flex!important;flex-direction:column!important;flex:0 0 auto!important;height:auto!important;min-height:0!important;overflow:visible!important}
+  #watermarkWorkspace #stage.stage:not(.compact-sticky-stage){
+    position:relative!important;display:flex!important;align-items:center!important;justify-content:center!important;
+    flex:0 0 50dvh!important;height:50dvh!important;min-height:50dvh!important;max-height:50dvh!important;
+    width:100%!important;box-sizing:border-box!important;overflow:hidden!important;padding:8px!important;
+  }
+  #watermarkWorkspace #stage.stage:not(.compact-sticky-stage) #preview:not([hidden]){
+    flex:none!important;display:block!important;max-width:calc(100% - 4px)!important;
+    max-height:calc(50dvh - 16px)!important;object-fit:contain!important;touch-action:none!important;
+  }
+}
+</style><style>
+/* Only the docked (scrolled) preview occupies 40% of the mobile viewport.
+   The normal, in-flow preview retains its prior dimensions. */
+@media(max-width:767px){
+ #watermarkWorkspace #stage.stage.compact-sticky-stage,
+ #combineWorkspace .combine-stage.compact-sticky-stage{
+   height:40dvh!important;min-height:40dvh!important;max-height:40dvh!important;
+   display:flex!important;align-items:center!important;justify-content:center!important;
+   box-sizing:border-box!important;padding:8px!important;
+ }
+ #watermarkWorkspace #stage.stage.compact-sticky-stage #preview:not([hidden]),
+ #combineWorkspace .combine-stage.compact-sticky-stage #combineCanvas:not([hidden]){
+   width:auto!important;height:auto!important;max-width:100%!important;
+   max-height:calc(40dvh - 16px)!important;object-fit:contain!important;
+   margin:auto!important;
+ }
+ #watermarkWorkspace #stage.stage.compact-sticky-stage #preview{touch-action:none!important}
+}
+</style><style>
+/* A 40dvh fixed preview must retain the same space in document flow.
+   Otherwise the following controls scroll underneath the fixed preview. */
+@media(max-width:767px){
+ #watermarkWorkspace .stage-sticky-placeholder:not([hidden]),
+ #combineWorkspace .stage-sticky-placeholder:not([hidden]),
+ #combineWorkspace .stage-sticky-placeholder.grid-scroll-anchor:not([hidden]){
+   display:block!important;height:40dvh!important;min-height:40dvh!important;
+   max-height:40dvh!important;flex:0 0 40dvh!important;
+   margin:0!important;padding:0!important;border:0!important;
+ }
+ #watermarkWorkspace .right,#combineWorkspace .right{scroll-margin-top:calc(40dvh + 12px)}
+ #watermarkWorkspace input,#combineWorkspace input,
+ #watermarkWorkspace select,#combineWorkspace select,
+ #watermarkWorkspace button,#combineWorkspace button{scroll-margin-top:calc(40dvh + 12px)}
+}
+</style><style>
+/* Mobile empty watermark state: compact like the image-combining empty state.
+   Loaded images retain the existing preview layout and 40dvh sticky behavior. */
+@media(max-width:767px){
+ #watermarkWorkspace #stage.stage:not(.compact-sticky-stage):has(#preview[hidden]){
+   flex:0 0 auto!important;height:auto!important;min-height:180px!important;max-height:none!important;
+   padding:14px 12px!important;
+ }
+ #watermarkWorkspace #stage.stage:has(#preview[hidden]) #empty:not([hidden]){
+   min-height:130px!important;max-width:100%;width:min(100%,370px);
+   box-sizing:border-box;margin:auto!important;
+ }
 }
 </style></head><body><header><div class="brand"><strong>◈ 2_mossi <span>studio</span></strong><a href="https://x.com/2_mossi" target="_blank" rel="noopener noreferrer" aria-label="2_mossi X 계정 새 탭에서 열기">𝕏 @2_mossi ↗</a></div><div class="actions"><a class="guide-link" href="guide.html" target="_blank" rel="noopener noreferrer" aria-label="이용 가이드 새 탭에서 열기">ⓘ 이용 가이드</a><button id="presetSave">설정 저장</button><button id="presetLoad">설정 불러오기</button><button id="previewBtn">◉ 결과 미리보기</button></div></header><input type="file" id="fileInput" accept="image/*" multiple><input type="file" id="logoInput" accept="image/png,image/webp,image/svg+xml,image/jpeg"><div class="worktabs"><button id="watermarkTab" class="active">워터마크 편집</button><button id="combineTab">이미지 합치기</button></div><div id="watermarkWorkspace" class="shell"><aside class="left"><h3>이미지 목록 <span id="count">0</span></h3><div id="thumbs" class="thumbs"></div></aside><main><div class="toolbar"><div><span style="font-weight:600;font-size:14px">이미지 편집</span></div><div class="toolbar-actions"><button id="removeBtn">선택 삭제</button><button id="clearWatermarkBtn">전체 삭제</button><button id="addBtn">＋ 이미지 추가</button></div></div><div class="stage" id="stage"><div class="empty" id="empty">이미지를 추가해 워터마크 편집을 시작하세요.<p class="hint">한 장씩 편집할 수 있습니다. 이미지는 브라우저에서만 처리됩니다.</p></div><canvas id="preview" hidden></canvas></div><div class="mobile-thumbs" id="mobileThumbs"></div><div class="status" id="status">이미지를 업로드해 주세요.</div></main><aside class="right"><h3>워터마크 설정</h3><div class="field"><label>유형</label><div class="type-options" role="group" aria-label="워터마크 유형"><button type="button" id="typeText" aria-pressed="true">텍스트</button><button type="button" id="typeLogo" aria-pressed="false">이미지 로고</button></div><input type="hidden" id="type" value="text"></div><div id="textFields"><div class="field"><label>문구</label><input id="text" value="© MY PHOTO" autocomplete="off"></div><div class="compact-two"><div class="field"><label>글꼴</label><select id="font"><option value="Arial">Arial</option><option value="sans-serif">Sans-serif</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div><div class="field"><label>색상</label><input id="color" type="color" value="#ffffff"></div></div></div><div id="logoFields" hidden><button id="chooseLogo">로고 파일 선택</button><p class="hint" id="logoName">PNG, JPG, WebP, SVG 지원</p></div><div class="section" id="antiTheftSection"><h3>도용방지 워터마크</h3><label class="checkbox"><input type="checkbox" id="antiTheft"> 화면 전체에 브릭 패턴 반복</label><p class="hint">입력한 문구를 벽돌처럼 엇갈리게 반복합니다. 크기·투명도·회전을 조절할 수 있습니다.</p></div><div class="section"><h3>스타일 및 변형</h3><div class="compact-two"><div class="field"><label>크기 <output id="sizeOut">30%</output></label><input id="size" type="range" min="2" max="80" value="30"></div><div class="field"><label>투명도 <output id="opacityOut">100%</output></label><input id="opacity" type="range" min="0" max="100" value="100"></div><div class="field"><label>회전 <output id="rotationOut">0°</output></label><input id="rotation" type="range" min="-180" max="180" value="0"></div></div></div><div class="section"><h3>위치</h3><div class="positions" id="positions"></div><div class="field"><label>가장자리 여백 <output id="marginOut">4%</output></label><input id="margin" type="range" min="0" max="20" value="4"></div><p class="hint">미리보기에서 워터마크를 마우스나 손가락으로 끌어 위치를 직접 조절할 수 있습니다.</p></div><div class="section"><h3>출력 설정</h3><div class="field"><label>파일 형식</label><select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div><label class="checkbox"><input type="checkbox" id="suffix" checked> 파일명에 _watermark 추가</label><p class="hint">선택 이미지 또는 전체 이미지를 저장할 수 있습니다. 원본은 변경되지 않습니다.</p></div><div class="watermark-save-actions"><button id="downloadBtn" class="primary">↓ 선택 이미지 저장</button><button id="downloadAllBtn" type="button">☑ 여러 이미지 선택 저장 <span id="downloadAllCount"></span></button><p class="hint" id="downloadAllHint">PC는 ZIP 다운로드 · 모바일은 사진 앱에 일괄 저장</p></div></aside></div><div id="combineWorkspace" class="combine-shell" hidden><div class="combine-main"><div class="combine-toolbar"><strong>이미지 합치기</strong><div class="combine-toolbar-actions"><button id="combineRemove" type="button">선택 삭제</button><button id="combineClear" type="button" class="combine-clear-top">전체 삭제</button><button id="combineAdd">＋ 이미지 추가</button></div></div><div class="combine-stage"><p class="empty" id="combineEmpty">이미지를 여러 장 추가해 주세요.<br><small>파일은 서버에 업로드되지 않습니다.</small></p><canvas id="combineCanvas" hidden></canvas></div><div id="combineItems" class="combine-items"></div><div class="combine-detail-launch"><button id="openCombineDetail" type="button">⤢ 자세히 편집하기</button></div><div class="status" id="combineStatus">이미지 0개</div></div><aside class="combine-side"><h3>합치기 설정</h3><p class="hint">이미지를 추가한 뒤 배치 방식을 선택하세요. 사진을 클릭하면 위치와 크기를 조절할 수 있습니다.</p>
 <div class="combine-categories" role="group" aria-label="레이아웃 카테고리"><button id="combineCategoryBasic" class="active" type="button">기본</button><button id="combineCategoryGrid" type="button">그리드</button><button id="combineCategoryBrick" type="button">벽돌형</button></div>
@@ -681,7 +743,7 @@ setWorkspace('watermark');renderCombine();
        if(p.marker.hidden){
          const isGrid=p.workspace==='combineWorkspace' && combineCategory==='grid';
          p.marker.classList.toggle('grid-scroll-anchor',isGrid);
-         p.marker.style.setProperty('height',isGrid?'112px':'0px','important');
+         p.marker.style.setProperty('height','40dvh','important');
          p.marker.hidden=false;
        }
        p.stage.classList.add('compact-sticky-stage');
