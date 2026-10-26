@@ -83,14 +83,196 @@
  .watermark-save-actions button{width:100%;min-width:0;font-size:12px;padding:11px 5px;line-height:1.4;white-space:normal}
  .watermark-save-actions .hint{grid-column:1/-1;font-size:11px}
 }
-</style></head><body><header><div class="brand"><strong>◈ 2_mossi <span>studio</span></strong><a href="https://x.com/2_mossi" target="_blank" rel="noopener noreferrer" aria-label="2_mossi X 계정 새 탭에서 열기">𝕏 @2_mossi ↗</a></div><div class="actions"><a class="guide-link" href="guide.html" target="_blank" rel="noopener noreferrer" aria-label="이용 가이드 새 탭에서 열기">ⓘ 이용 가이드</a><button id="presetSave">설정 저장</button><button id="presetLoad">설정 불러오기</button><button id="previewBtn">◉ 결과 미리보기</button></div></header><input type="file" id="fileInput" accept="image/*" multiple><input type="file" id="logoInput" accept="image/png,image/webp,image/svg+xml,image/jpeg"><div class="worktabs"><button id="watermarkTab" class="active">워터마크 편집</button><button id="combineTab">이미지 합치기</button></div><div id="watermarkWorkspace" class="shell"><aside class="left"><h3>이미지 목록 <span id="count">0</span></h3><div id="thumbs" class="thumbs"></div></aside><main><div class="toolbar"><div><span style="font-weight:600;font-size:14px">이미지 편집</span></div><div class="toolbar-actions"><button id="removeBtn">선택 삭제</button><button id="clearWatermarkBtn">전체 삭제</button><button id="addBtn">＋ 이미지 추가</button></div></div><div class="stage" id="stage"><div class="empty" id="empty">이미지를 추가해 워터마크 편집을 시작하세요.<p class="hint">한 장씩 편집할 수 있습니다. 이미지는 브라우저에서만 처리됩니다.</p></div><canvas id="preview" hidden></canvas></div><div class="mobile-thumbs" id="mobileThumbs"></div><div class="status" id="status">이미지를 업로드해 주세요.</div></main><aside class="right"><h3>워터마크 설정</h3><div class="field"><label>유형</label><div class="type-options" role="group" aria-label="워터마크 유형"><button type="button" id="typeText" aria-pressed="true">텍스트</button><button type="button" id="typeLogo" aria-pressed="false">이미지 로고</button></div><input type="hidden" id="type" value="text"></div><div id="textFields"><div class="field"><label>문구</label><input id="text" value="© MY PHOTO"></div><div class="compact-two"><div class="field"><label>글꼴</label><select id="font"><option value="Arial">Arial</option><option value="sans-serif">Sans-serif</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div><div class="field"><label>색상</label><input id="color" type="color" value="#ffffff"></div></div></div><div id="logoFields" hidden><button id="chooseLogo">로고 파일 선택</button><p class="hint" id="logoName">PNG, JPG, WebP, SVG 지원</p></div><div class="section" id="antiTheftSection"><h3>도용방지 워터마크</h3><label class="checkbox"><input type="checkbox" id="antiTheft"> 화면 전체에 브릭 패턴 반복</label><p class="hint">입력한 문구를 벽돌처럼 엇갈리게 반복합니다. 크기·투명도·회전을 조절할 수 있습니다.</p></div><div class="section"><h3>스타일 및 변형</h3><div class="compact-two"><div class="field"><label>크기 <output id="sizeOut">30%</output></label><input id="size" type="range" min="2" max="80" value="30"></div><div class="field"><label>투명도 <output id="opacityOut">100%</output></label><input id="opacity" type="range" min="0" max="100" value="100"></div><div class="field"><label>회전 <output id="rotationOut">0°</output></label><input id="rotation" type="range" min="-180" max="180" value="0"></div></div></div><div class="section"><h3>위치</h3><div class="positions" id="positions"></div><div class="field"><label>가장자리 여백 <output id="marginOut">4%</output></label><input id="margin" type="range" min="0" max="20" value="4"></div><p class="hint">미리보기에서 워터마크를 마우스나 손가락으로 끌어 위치를 직접 조절할 수 있습니다.</p></div><div class="section"><h3>출력 설정</h3><div class="field"><label>파일 형식</label><select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div><label class="checkbox"><input type="checkbox" id="suffix" checked> 파일명에 _watermark 추가</label><p class="hint">선택 이미지 또는 전체 이미지를 저장할 수 있습니다. 원본은 변경되지 않습니다.</p></div><div class="watermark-save-actions"><button id="downloadBtn" class="primary">↓ 선택 이미지 저장</button><button id="downloadAllBtn" type="button">☑ 여러 이미지 선택 저장 <span id="downloadAllCount"></span></button><p class="hint" id="downloadAllHint">PC는 ZIP 다운로드 · 모바일은 사진 앱에 일괄 저장</p></div></aside></div><div id="combineWorkspace" class="combine-shell" hidden><div class="combine-main"><div class="combine-toolbar"><strong>이미지 합치기</strong><div class="combine-toolbar-actions"><button id="combineClear" type="button" class="combine-clear-top">전체 삭제</button><button id="combineAdd">＋ 이미지 추가</button></div></div><div class="combine-stage"><p class="empty" id="combineEmpty">이미지를 여러 장 추가해 주세요.<br><small>파일은 서버에 업로드되지 않습니다.</small></p><canvas id="combineCanvas" hidden></canvas></div><div id="combineItems" class="combine-items"></div><p class="hint" style="padding:0 14px">사진을 클릭한 뒤 드래그하여 보이는 부분을 조절하세요. 각 사진의 위치와 확대 비율이 유지됩니다.</p><div class="status" id="combineStatus">이미지 0개</div></div><aside class="combine-side"><h3>합치기 설정</h3><p class="hint">이미지를 추가한 뒤 배치 방식을 선택하세요. 사진을 클릭하면 위치와 크기를 조절할 수 있습니다.</p>
+
+/* Dedicated composer detail editor */
+.combine-detail-launch{padding:0 14px 12px;display:flex;justify-content:flex-end}
+.combine-detail-launch button{background:#293f64;border-color:#5683c3;font-weight:600}
+.detail-overlay[hidden]{display:none!important}.detail-overlay{position:fixed;inset:0;z-index:110;background:#070b12d9;display:flex;align-items:center;justify-content:center;padding:14px}
+.detail-panel{width:min(650px,100%);max-height:calc(100dvh - 28px);background:#1b2432;border:1px solid #40516c;border-radius:16px;display:flex;flex-direction:column;overflow:hidden}
+.detail-head{display:flex;justify-content:space-between;align-items:center;padding:13px 16px;border-bottom:1px solid #344157;gap:10px}.detail-head strong{font-size:15px}
+.detail-body{overflow-y:auto;overscroll-behavior:contain;padding:12px 16px 18px}.detail-help{color:#aebed4;font-size:12px;margin:0 0 10px}
+.detail-view{height:min(53dvh,490px);min-height:220px;background:#101722;border:1px solid #344157;border-radius:10px;display:flex;justify-content:center;align-items:center;overflow:hidden;touch-action:none}
+.detail-view canvas{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;touch-action:none;cursor:grab}
+.detail-controls{display:grid;gap:8px;margin-top:12px}.detail-controls label{font-size:13px;display:flex;justify-content:space-between}.detail-controls input{width:100%;accent-color:#5a94f5}
+.detail-footer{display:flex;gap:8px;margin-top:15px}.detail-footer button{flex:1}
+@media(max-width:767px){.detail-overlay{padding:0}.detail-panel{height:100dvh;max-height:100dvh;border-radius:0;border:0}.detail-view{height:min(58dvh,560px)}.detail-body{padding:12px}.combine-detail-launch button{width:100%}}
+
+/* Composer image list: cards wrap naturally, no nested scrollbars or clipped controls. */
+.combine-items{
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));
+ gap:9px;
+ padding:12px 14px;
+ max-height:none;
+ overflow:visible;
+ align-items:stretch;
+}
+.combine-item{width:100%;min-width:0;gap:6px;flex-wrap:wrap;align-content:center}
+.combine-item img{flex:0 0 44px}
+.combine-item span{flex:1 1 70px;min-width:0}
+.combine-item button{flex:0 0 auto;min-width:27px}
+.combine-detail-launch{padding:4px 14px 14px}
+@media(max-width:767px){
+ .combine-items{grid-template-columns:repeat(2,minmax(0,1fr));max-height:none;overflow:visible;gap:8px;padding:10px}
+ .combine-item{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:auto auto;gap:5px;padding:7px}
+ .combine-item img{grid-column:1;grid-row:1;width:44px;height:44px}
+ .combine-item span{grid-column:2;grid-row:1;align-self:center;min-width:0}
+ .combine-item button{grid-row:2;min-width:0;padding:5px 4px}
+ .combine-item button:nth-of-type(1){grid-column:1}
+ .combine-item button:nth-of-type(2){grid-column:2}
+ .combine-item button:nth-of-type(3){grid-column:1 / -1}
+}
+@media(max-width:360px){.combine-items{grid-template-columns:1fr}}
+
+/* Mobile refinements: ordering controls and scroll-triggered watermark actions */
+@media(max-width:767px){
+  #watermarkWorkspace.shell{height:auto;min-height:0;overflow:visible}
+  #watermarkWorkspace .right{max-height:none;min-height:0;overflow:visible;padding-bottom:16px}
+  #watermarkWorkspace .watermark-save-actions{position:static;left:auto;right:auto;bottom:auto;z-index:auto;margin:18px 0 0;padding:12px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;background:transparent;border-top:1px solid #40506a;box-shadow:none}
+  body.watermark-scrolled #watermarkWorkspace:not([hidden]) .watermark-save-actions{position:fixed;left:0;right:0;bottom:0;z-index:20;margin:0;padding:10px 12px max(10px,env(safe-area-inset-bottom));background:#1b2432;box-shadow:0 -6px 20px #05080d99}
+  body.watermark-scrolled #watermarkWorkspace:not([hidden]) .right{padding-bottom:calc(112px + env(safe-area-inset-bottom))}
+  #watermarkWorkspace .watermark-save-actions button{min-height:46px;font-size:12px;padding:9px 5px}
+  #watermarkWorkspace .watermark-save-actions .hint{display:none}
+  #watermarkWorkspace[hidden] .watermark-save-actions{display:none!important}
+  .combine-item{grid-template-columns:44px minmax(0,1fr)!important;grid-template-rows:44px 32px!important;gap:6px!important}
+  .combine-item button{grid-row:2!important;min-width:0!important;padding:5px 2px!important}
+  .combine-item button:nth-of-type(1){grid-column:1!important;justify-self:stretch}
+  .combine-item button:nth-of-type(2){grid-column:2!important;width:calc(50% - 3px);justify-self:start}
+  .combine-item button:nth-of-type(3){grid-column:2!important;width:calc(50% - 3px);justify-self:end}
+}
+
+/* Unified compact composer cards: thumbnail, filename, arrows in one row. */
+.combine-item{display:grid!important;grid-template-columns:44px minmax(0,1fr) 30px 30px!important;grid-template-rows:44px!important;align-items:center;gap:6px!important;padding:7px!important;min-width:0;cursor:pointer}
+.combine-item img{grid-column:1!important;grid-row:1!important;width:44px!important;height:44px!important;object-fit:cover}
+.combine-item span{grid-column:2!important;grid-row:1!important;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.combine-item button,.combine-item button:nth-of-type(1),.combine-item button:nth-of-type(2){grid-row:1!important;width:30px!important;height:32px!important;min-width:30px!important;padding:0!important;justify-self:stretch!important;font-size:14px!important}
+.combine-item button:nth-of-type(1){grid-column:3!important}.combine-item button:nth-of-type(2){grid-column:4!important}
+.combine-item button:disabled{opacity:.35;cursor:default}
+.combine-toolbar-actions button{min-width:0;min-height:34px;white-space:nowrap}
+@media(max-width:767px){
+ .combine-items{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;padding:10px}
+ .combine-item{grid-template-columns:36px minmax(0,1fr) 25px 25px!important;grid-template-rows:38px!important;gap:3px!important;padding:5px!important}
+ .combine-item img{width:36px!important;height:36px!important}
+ .combine-item button,.combine-item button:nth-of-type(1),.combine-item button:nth-of-type(2){width:25px!important;min-width:25px!important;height:30px!important;font-size:12px!important}
+ .combine-toolbar-actions button{font-size:11px!important;padding:7px 6px!important;min-height:34px!important}
+ #combineWorkspace.combine-shell{height:auto;min-height:0;overflow:visible}
+ #combineWorkspace .combine-side{max-height:none;min-height:0;overflow:visible}
+ #combineWorkspace .combine-save-actions{position:static;left:auto;right:auto;bottom:auto;z-index:auto;margin:18px 0 0;padding:12px 0;background:transparent;box-shadow:none}
+ body.combine-scrolled #combineWorkspace:not([hidden]) .combine-save-actions{position:fixed;left:0;right:0;bottom:0;z-index:20;margin:0;padding:10px 12px max(10px,env(safe-area-inset-bottom));background:#1b2432;border-top:1px solid #40506a;box-shadow:0 -6px 20px #05080d99}
+ body.combine-scrolled #combineWorkspace:not([hidden]) .combine-side{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+ #combineWorkspace .combine-save-actions .combine-cta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ #combineWorkspace .combine-save-actions .combine-cta button{width:100%;min-width:0;min-height:46px;font-size:12px;padding:9px 5px}
+ #combineWorkspace .combine-save-actions .combine-cta-hint{display:none}
+}
+@media(max-width:410px){.combine-items{grid-template-columns:1fr}.combine-item{grid-template-columns:44px minmax(0,1fr) 34px 34px!important}.combine-item img{width:44px!important;height:38px!important}.combine-item button,.combine-item button:nth-of-type(1),.combine-item button:nth-of-type(2){width:34px!important;min-width:34px!important}}
+
+/* Mobile combine list: compact horizontal thumbnail and reorder controls */
+@media (max-width:767px){
+  #combineItems.combine-items{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:7px!important}
+  #combineItems .combine-item{display:grid!important;grid-template-columns:minmax(0,1fr) 32px 32px!important;grid-template-rows:44px!important;align-items:center!important;gap:3px!important;padding:4px!important;min-height:0!important;height:52px!important;flex-direction:row!important}
+  #combineItems .combine-item img{grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0!important;height:44px!important;object-fit:cover!important;flex:none!important}
+  #combineItems .combine-item button,#combineItems .combine-item button:nth-of-type(1),#combineItems .combine-item button:nth-of-type(2){grid-row:1!important;width:32px!important;min-width:32px!important;height:40px!important;min-height:40px!important;padding:0!important;font-size:14px!important;line-height:1!important;flex:none!important;border-radius:6px!important}
+  #combineItems .combine-item button:nth-of-type(1){grid-column:2!important}
+  #combineItems .combine-item button:nth-of-type(2){grid-column:3!important}
+}
+</style><style>
+/* 합치기 이미지 목록: 파일명 숨김, 사진과 순서 버튼을 한 줄에 배치 */
+.combine-item{display:flex!important;flex-wrap:nowrap!important;align-items:center!important;gap:6px!important;min-width:0!important}
+.combine-item img{flex:0 0 44px!important;width:44px!important;height:44px!important}
+.combine-item button{flex:1 1 0!important;min-width:0!important;height:34px!important;padding:4px!important}
+@media(max-width:767px){.combine-item{display:flex!important;grid-template-columns:none!important;grid-template-rows:none!important}.combine-item img,.combine-item button{grid-column:auto!important;grid-row:auto!important}}
+
+/* Compact three-column composer cards and scroll-aware live preview */
+@media(max-width:767px){
+ #combineItems.combine-items{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:8px!important;overflow:visible!important}
+ #combineItems .combine-item{display:flex!important;flex-direction:row!important;align-items:center!important;gap:3px!important;padding:4px!important;min-width:0!important;min-height:43px!important;grid-template-columns:none!important;grid-template-rows:none!important}
+ #combineItems .combine-item img{flex:1 1 auto!important;width:calc(100% - 42px)!important;min-width:0!important;height:36px!important;object-fit:cover!important}
+ #combineItems .combine-item button,#combineItems .combine-item button:nth-of-type(1),#combineItems .combine-item button:nth-of-type(2){flex:0 0 18px!important;width:18px!important;min-width:18px!important;height:27px!important;padding:0!important;font-size:11px!important;border-radius:5px!important;line-height:1!important}
+}
+.live-mini-preview{display:none;position:fixed;top:env(safe-area-inset-top,0px);left:50%;transform:translateX(-50%);width:min(92vw,360px);height:112px;padding:6px 9px;background:#1b2637f5;border:1px solid #405677;border-radius:0 0 12px 12px;box-shadow:0 6px 22px #0008;z-index:30;pointer-events:none;align-items:center;justify-content:center;gap:8px}
+.live-mini-preview canvas{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.live-mini-preview .mini-label{font-size:10px;color:#a8bad4;writing-mode:vertical-rl;white-space:nowrap}
+@media(max-width:767px){body.show-live-mini .live-mini-preview{display:flex}}
+body:has(.detail-overlay:not([hidden])) .live-mini-preview,body:has(.batch-select-modal:not([hidden])) .live-mini-preview,body:has(.preview-modal:not([hidden])) .live-mini-preview,body:has(.mobile-save-modal:not([hidden])) .live-mini-preview{display:none!important}
+</style><style>
+/* Mobile: shrink and dock the EXISTING preview, not a duplicate overlay. */
+@media(max-width:767px){
+ #watermarkWorkspace .status,#combineWorkspace .status{display:none!important}
+ #watermarkWorkspace .stage.compact-sticky-stage,
+ #combineWorkspace .combine-stage.compact-sticky-stage{
+   position:fixed!important;top:0!important;left:0!important;right:0!important;
+   width:100%!important;height:132px!important;min-height:0!important;
+   max-height:132px!important;flex:none!important;z-index:19!important;
+   padding:6px 10px!important;margin:0!important;overflow:hidden!important;
+   background:#121a26!important;border-bottom:1px solid #40506a!important;
+   box-shadow:0 5px 14px #0006!important;
+ }
+ #watermarkWorkspace .stage.compact-sticky-stage canvas,
+ #combineWorkspace .combine-stage.compact-sticky-stage canvas{
+   display:block;max-width:100%!important;max-height:118px!important;
+   width:auto!important;height:auto!important;object-fit:contain!important;
+ }
+ .stage-sticky-placeholder[hidden]{display:none!important}
+}
+</style><style>
+/* Compact docked preview: eliminate the oversized empty placeholder. */
+@media(max-width:767px){
+ .stage-sticky-placeholder:not([hidden]){height:0!important;min-height:0!important;margin:0!important;padding:0!important;border:0!important}
+ #watermarkWorkspace .stage.compact-sticky-stage,
+ #combineWorkspace .combine-stage.compact-sticky-stage{height:112px!important;max-height:112px!important;padding:5px 8px!important}
+ #watermarkWorkspace .stage.compact-sticky-stage canvas,
+ #combineWorkspace .combine-stage.compact-sticky-stage canvas{max-height:100px!important}
+ /* Three columns, with genuinely tappable reorder controls. */
+ #combineItems.combine-items{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:8px!important;padding:8px!important}
+ #combineItems .combine-item{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;grid-template-rows:68px 44px!important;gap:5px!important;padding:6px!important;min-width:0!important;min-height:0!important}
+ #combineItems .combine-item img{grid-column:1 / -1!important;grid-row:1!important;width:100%!important;height:68px!important;min-width:0!important;object-fit:cover!important;flex:none!important}
+ #combineItems .combine-item button,#combineItems .combine-item button:nth-of-type(1),#combineItems .combine-item button:nth-of-type(2){grid-row:2!important;grid-column:auto!important;width:100%!important;min-width:0!important;height:44px!important;min-height:44px!important;font-size:16px!important;padding:0!important;flex:none!important;border-radius:7px!important}
+ #combineItems .combine-item button:nth-of-type(1){grid-column:1!important}
+ #combineItems .combine-item button:nth-of-type(2){grid-column:2!important}
+}
+</style><style>
+/* Final mobile override: one horizontal row per image, three columns. */
+@media (max-width:767px){
+ #combineItems.combine-items{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important;padding:7px!important;max-height:none!important;overflow:visible!important}
+ #combineItems > .combine-item{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:space-between!important;grid-template-columns:none!important;grid-template-rows:none!important;gap:3px!important;padding:4px!important;min-height:44px!important;height:48px!important;width:100%!important;overflow:hidden!important}
+ #combineItems > .combine-item > img{display:block!important;position:static!important;grid-column:auto!important;grid-row:auto!important;flex:1 1 0!important;width:0!important;min-width:0!important;height:38px!important;max-height:38px!important;object-fit:cover!important}
+ #combineItems > .combine-item > button,
+ #combineItems > .combine-item > button:nth-of-type(1),
+ #combineItems > .combine-item > button:nth-of-type(2){display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;grid-column:auto!important;grid-row:auto!important;flex:0 0 27px!important;width:27px!important;min-width:27px!important;max-width:27px!important;height:38px!important;min-height:38px!important;padding:0!important;margin:0!important;font-size:14px!important;line-height:1!important;border-radius:6px!important;}
+}
+
+/* FINAL mobile combine cards: portrait thumbnail beside touch-sized arrows */
+@media (max-width:767px){
+  #combineItems.combine-items{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;padding:6px!important;overflow:visible!important}
+  #combineItems > .combine-item{display:grid!important;grid-template-columns:minmax(22px,1fr) minmax(34px,1fr) minmax(34px,1fr)!important;grid-template-rows:48px!important;align-items:stretch!important;gap:2px!important;padding:3px!important;min-height:54px!important;height:54px!important;box-sizing:border-box!important;overflow:hidden!important;flex-direction:unset!important;flex-wrap:unset!important}
+  #combineItems > .combine-item > img{display:block!important;grid-column:1!important;grid-row:1!important;position:static!important;align-self:stretch!important;justify-self:stretch!important;width:100%!important;min-width:0!important;max-width:none!important;height:48px!important;max-height:none!important;object-fit:cover!important;object-position:center!important;flex:none!important;border-radius:4px!important}
+  #combineItems > .combine-item > button,#combineItems > .combine-item > button:nth-of-type(1),#combineItems > .combine-item > button:nth-of-type(2){display:flex!important;align-items:center!important;justify-content:center!important;position:static!important;grid-row:1!important;width:100%!important;min-width:0!important;max-width:none!important;height:48px!important;min-height:48px!important;margin:0!important;padding:0!important;flex:none!important;font-size:16px!important;line-height:1!important;border-radius:5px!important}
+  #combineItems > .combine-item > button:nth-of-type(1){grid-column:2!important}
+  #combineItems > .combine-item > button:nth-of-type(2){grid-column:3!important}
+}
+</style>
+<style>
+/* Mobile composer: compact portrait thumbnails with 40px reorder buttons. */
+@media(max-width:767px){
+ #combineItems > .combine-item{height:48px!important;min-height:48px!important;grid-template-rows:40px!important;padding:4px!important;gap:2px!important;}
+ #combineItems > .combine-item > img{height:40px!important;max-height:40px!important;}
+ #combineItems > .combine-item > button,#combineItems > .combine-item > button:nth-of-type(1),#combineItems > .combine-item > button:nth-of-type(2){height:40px!important;min-height:40px!important;max-height:40px!important;}
+ /* Prevent flex-grow and the old 260px minimum from leaving a large empty preview panel. */
+ #combineWorkspace .combine-main{min-height:0!important;height:auto!important;flex:0 0 auto!important;}
+ #combineWorkspace .combine-stage:not(.compact-sticky-stage){flex:0 0 auto!important;height:auto!important;min-height:0!important;max-height:none!important;overflow:hidden!important;padding:10px 8px!important;}
+ #combineWorkspace .combine-stage:not(.compact-sticky-stage) canvas:not([hidden]){display:block!important;width:auto!important;height:auto!important;max-width:100%!important;max-height: min(55dvh, 420px)!important;object-fit:contain!important;margin:auto!important;}
+ #combineWorkspace .combine-stage:not(.compact-sticky-stage) #combineEmpty:not([hidden]){min-height:130px!important;display:flex!important;align-items:center!important;justify-content:center!important;}
+ #combineWorkspace .combine-stage.compact-sticky-stage{height:112px!important;min-height:0!important;max-height:112px!important;flex:none!important;}
+}
+</style>
+</head><body><header><div class="brand"><strong>◈ 2_mossi <span>studio</span></strong><a href="https://x.com/2_mossi" target="_blank" rel="noopener noreferrer" aria-label="2_mossi X 계정 새 탭에서 열기">𝕏 @2_mossi ↗</a></div><div class="actions"><a class="guide-link" href="guide.html" target="_blank" rel="noopener noreferrer" aria-label="이용 가이드 새 탭에서 열기">ⓘ 이용 가이드</a><button id="presetSave">설정 저장</button><button id="presetLoad">설정 불러오기</button><button id="previewBtn">◉ 결과 미리보기</button></div></header><input type="file" id="fileInput" accept="image/*" multiple><input type="file" id="logoInput" accept="image/png,image/webp,image/svg+xml,image/jpeg"><div class="worktabs"><button id="watermarkTab" class="active">워터마크 편집</button><button id="combineTab">이미지 합치기</button></div><div id="watermarkWorkspace" class="shell"><aside class="left"><h3>이미지 목록 <span id="count">0</span></h3><div id="thumbs" class="thumbs"></div></aside><main><div class="toolbar"><div><span style="font-weight:600;font-size:14px">이미지 편집</span></div><div class="toolbar-actions"><button id="removeBtn">선택 삭제</button><button id="clearWatermarkBtn">전체 삭제</button><button id="addBtn">＋ 이미지 추가</button></div></div><div class="stage" id="stage"><div class="empty" id="empty">이미지를 추가해 워터마크 편집을 시작하세요.<p class="hint">한 장씩 편집할 수 있습니다. 이미지는 브라우저에서만 처리됩니다.</p></div><canvas id="preview" hidden></canvas></div><div class="mobile-thumbs" id="mobileThumbs"></div><div class="status" id="status">이미지를 업로드해 주세요.</div></main><aside class="right"><h3>워터마크 설정</h3><div class="field"><label>유형</label><div class="type-options" role="group" aria-label="워터마크 유형"><button type="button" id="typeText" aria-pressed="true">텍스트</button><button type="button" id="typeLogo" aria-pressed="false">이미지 로고</button></div><input type="hidden" id="type" value="text"></div><div id="textFields"><div class="field"><label>문구</label><input id="text" value="© MY PHOTO"></div><div class="compact-two"><div class="field"><label>글꼴</label><select id="font"><option value="Arial">Arial</option><option value="sans-serif">Sans-serif</option><option value="serif">Serif</option><option value="monospace">Monospace</option></select></div><div class="field"><label>색상</label><input id="color" type="color" value="#ffffff"></div></div></div><div id="logoFields" hidden><button id="chooseLogo">로고 파일 선택</button><p class="hint" id="logoName">PNG, JPG, WebP, SVG 지원</p></div><div class="section" id="antiTheftSection"><h3>도용방지 워터마크</h3><label class="checkbox"><input type="checkbox" id="antiTheft"> 화면 전체에 브릭 패턴 반복</label><p class="hint">입력한 문구를 벽돌처럼 엇갈리게 반복합니다. 크기·투명도·회전을 조절할 수 있습니다.</p></div><div class="section"><h3>스타일 및 변형</h3><div class="compact-two"><div class="field"><label>크기 <output id="sizeOut">30%</output></label><input id="size" type="range" min="2" max="80" value="30"></div><div class="field"><label>투명도 <output id="opacityOut">100%</output></label><input id="opacity" type="range" min="0" max="100" value="100"></div><div class="field"><label>회전 <output id="rotationOut">0°</output></label><input id="rotation" type="range" min="-180" max="180" value="0"></div></div></div><div class="section"><h3>위치</h3><div class="positions" id="positions"></div><div class="field"><label>가장자리 여백 <output id="marginOut">4%</output></label><input id="margin" type="range" min="0" max="20" value="4"></div><p class="hint">미리보기에서 워터마크를 마우스나 손가락으로 끌어 위치를 직접 조절할 수 있습니다.</p></div><div class="section"><h3>출력 설정</h3><div class="field"><label>파일 형식</label><select id="format"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div><label class="checkbox"><input type="checkbox" id="suffix" checked> 파일명에 _watermark 추가</label><p class="hint">선택 이미지 또는 전체 이미지를 저장할 수 있습니다. 원본은 변경되지 않습니다.</p></div><div class="watermark-save-actions"><button id="downloadBtn" class="primary">↓ 선택 이미지 저장</button><button id="downloadAllBtn" type="button">☑ 여러 이미지 선택 저장 <span id="downloadAllCount"></span></button><p class="hint" id="downloadAllHint">PC는 ZIP 다운로드 · 모바일은 사진 앱에 일괄 저장</p></div></aside></div><div id="combineWorkspace" class="combine-shell" hidden><div class="combine-main"><div class="combine-toolbar"><strong>이미지 합치기</strong><div class="combine-toolbar-actions"><button id="combineRemove" type="button">선택 삭제</button><button id="combineClear" type="button" class="combine-clear-top">전체 삭제</button><button id="combineAdd">＋ 이미지 추가</button></div></div><div class="combine-stage"><p class="empty" id="combineEmpty">이미지를 여러 장 추가해 주세요.<br><small>파일은 서버에 업로드되지 않습니다.</small></p><canvas id="combineCanvas" hidden></canvas></div><div id="combineItems" class="combine-items"></div><div class="combine-detail-launch"><button id="openCombineDetail" type="button">⤢ 자세히 편집하기</button></div><div class="status" id="combineStatus">이미지 0개</div></div><aside class="combine-side"><h3>합치기 설정</h3><p class="hint">이미지를 추가한 뒤 배치 방식을 선택하세요. 사진을 클릭하면 위치와 크기를 조절할 수 있습니다.</p>
 <div class="combine-categories" role="group" aria-label="레이아웃 카테고리"><button id="combineCategoryBasic" class="active" type="button">기본</button><button id="combineCategoryGrid" type="button">그리드</button><button id="combineCategoryBrick" type="button">벽돌형</button></div>
 <div id="combineBasicOptions" class="combine-options"><div class="field"><label>배치 방식</label><select id="combineMode"><option value="horizontal">가로 이어 붙이기</option><option value="vertical">세로 이어 붙이기</option></select></div></div>
 <div id="combineGridOptions" class="combine-options" hidden><div class="field"><label>그리드 구성</label><select id="combineGrid"><option value="2x2">2 × 2 (4칸)</option><option value="2x3">2 × 3 (6칸)</option><option value="3x2">3 × 2 (6칸)</option><option value="3x3">3 × 3 (9칸)</option><option value="4x3">4 × 3 (12칸)</option><option value="3x4">3 × 4 (12칸)</option><option value="4x4">4 × 4 (16칸)</option><option value="5x4">5 × 4 (20칸)</option><option value="4x5">4 × 5 (20칸)</option><option value="5x5">5 × 5 (25칸)</option></select></div><div class="field"><label>그리드 칸 비율</label><select id="combineGridRatio"><option value="1">정사각형 1:1</option><option value="1.5">가로형 3:2</option><option value="0.666667">세로형 2:3</option><option value="1.777778">와이드 16:9</option></select></div></div>
 <div id="combineBrickOptions" class="combine-options" hidden><p class="combine-help">가로·세로 사진을 빈틈없는 직사각형으로 조합합니다. 사진 장수에 맞춰 자동으로 칸을 나눕니다.</p><div class="layout-presets" id="combinePresets"></div></div>
 <div id="combineSizeOptions"><div class="field"><label>전체 출력 너비 (px)</label><input id="combineOutputWidth" type="number" min="320" max="12000" value="2400"></div><div class="compact-two"><div class="field"><label>이미지 사이 간격 (px)</label><input id="combineGap" type="number" min="0" max="200" value="0"></div><div class="field"><label>간격 색상</label><input id="combineBackground" type="color" value="#ffffff"></div></div><div class="field"><label>파일 형식</label><select id="combineFormat"><option value="image/jpeg">JPG</option><option value="image/png">PNG</option><option value="image/webp">WebP</option></select></div></div>
 <div id="combineImageEditor" class="combine-editor" hidden><h3>선택 이미지 편집 <span id="combineSelectedName" style="font-weight:400;color:#99abc3"></span></h3><div class="field"><label>이미지 크기 <output id="combineZoomOut">100%</output></label><input id="combineZoom" type="range" min="100" max="300" step="5" value="100"></div><div class="field"><label>가로 위치 <output id="combineXOut">50%</output></label><input id="combineX" type="range" min="0" max="100" value="50"></div><div class="field"><label>세로 위치 <output id="combineYOut">50%</output></label><input id="combineY" type="range" min="0" max="100" value="50"></div><button id="combineReset" type="button">↺ 이미지 위치 초기화</button><p class="combine-help">미리보기에서 사진을 드래그해 위치를 이동할 수도 있습니다. 저장 이미지에는 선택 표시가 포함되지 않습니다.</p></div>
-<div class="section combine-save-actions"><div class="combine-cta"><button id="combineDownload" class="primary" type="button">↓ 이미지 저장</button><button id="combineToWatermark" class="secondary" type="button">워터마크 편집 →</button></div><p class="combine-cta-hint">워터마크 편집을 선택하면 합친 이미지가 자동으로 전달됩니다.</p></div></aside></div><input type="file" id="combineFileInput" accept="image/*" multiple hidden><div id="previewModal" class="preview-modal" hidden><div class="preview-dialog"><div class="preview-head"><strong>결과 미리보기</strong><button id="closePreview" aria-label="미리보기 닫기">✕</button></div><div class="preview-controls"><button id="prevPreview" hidden>← 이전</button><span id="previewCounter"></span><button id="nextPreview" hidden>다음 →</button></div><div class="preview-tabs"><button id="showResult" class="active">워터마크 적용</button><button id="showOriginal">원본 보기</button></div><div class="preview-image-wrap"><canvas id="resultCanvas"></canvas></div><div class="preview-footer"><span id="previewFileName"></span><button id="previewDownload" class="primary">이 이미지 다운로드</button></div></div></div><div id="mobileSaveModal" class="mobile-save-modal" hidden><div class="mobile-save-panel"><div class="preview-head"><strong>사진 저장하기</strong><button id="closeMobileSave" aria-label="닫기">✕</button></div><p>아래 완성된 사진을 길게 누른 뒤 ‘사진에 저장’ 또는 ‘이미지 저장’을 선택하세요. 길게 누르기가 안 되면 ‘공유 메뉴 열기’나 ‘파일로 다운로드’를 이용할 수 있습니다.</p><div id="mobileBatchNav" class="mobile-batch-nav" hidden><button id="mobileBatchPrev" type="button">← 이전 사진</button><span id="mobileBatchCounter" aria-live="polite"></span><button id="mobileBatchNext" type="button">다음 사진 →</button></div><img id="mobileSaveImage" alt="저장할 이미지" draggable="false"><div class="mobile-save-actions"><button id="mobileSaveDownload">파일로 다운로드</button><button id="mobileSaveShare" class="primary">공유 메뉴 열기</button></div></div></div><div id="batchSelectModal" class="batch-select-modal" hidden><div class="batch-select-panel" role="dialog" aria-modal="true" aria-label="저장할 이미지 선택"><div class="batch-select-head"><strong>저장할 사진 선택</strong><button id="batchSelectClose" type="button" aria-label="닫기">✕</button></div><div class="batch-select-tools"><label><input id="batchSelectAll" type="checkbox" checked> 전체 선택</label><span id="batchSelectedCount">0장 선택됨</span></div><div id="batchSelectGrid" class="batch-select-grid"></div><div class="batch-select-footer"><button id="batchZipSave" type="button" class="primary">선택한 사진 ZIP 저장</button><button id="batchMobileSave" type="button">사진 준비 중…</button></div><p id="batchShareStatus" class="hint" style="padding:0 16px 14px;display:none" aria-live="polite"></p></div></div></div><div id="toast"></div><script>
+<div class="section combine-save-actions"><div class="combine-cta"><button id="combineDownload" class="primary" type="button">↓ 이미지 저장</button><button id="combineToWatermark" class="secondary" type="button">워터마크 편집 →</button></div><p class="combine-cta-hint">워터마크 편집을 선택하면 합친 이미지가 자동으로 전달됩니다.</p></div></aside></div><div id="combineDetailModal" class="detail-overlay" hidden role="dialog" aria-modal="true" aria-label="이미지 상세 편집"><div class="detail-panel"><div class="detail-head"><strong>이미지 상세 편집 <span id="detailFileName" style="color:#9fb2cd;font-size:12px"></span></strong><button id="closeCombineDetail" type="button" aria-label="닫기">✕</button></div><div class="detail-body"><p class="detail-help">한 손가락으로 사진 이동 · 두 손가락으로 확대·축소 · 슬라이더로 정밀 조절</p><div class="detail-view" id="detailView"><canvas id="detailCanvas"></canvas></div><div class="detail-controls"><label>이미지 크기 <output id="detailZoomOut">100%</output></label><input id="detailZoom" type="range" min="100" max="300" step="1" value="100"><label>가로 위치 <output id="detailXOut">50%</output></label><input id="detailX" type="range" min="0" max="100" value="50"><label>세로 위치 <output id="detailYOut">50%</output></label><input id="detailY" type="range" min="0" max="100" value="50"></div><div class="detail-footer"><button id="detailReset" type="button">초기화</button><button id="detailDone" type="button" class="primary">편집 적용</button></div></div></div></div><input type="file" id="combineFileInput" accept="image/*" multiple hidden><div id="previewModal" class="preview-modal" hidden><div class="preview-dialog"><div class="preview-head"><strong>결과 미리보기</strong><button id="closePreview" aria-label="미리보기 닫기">✕</button></div><div class="preview-controls"><button id="prevPreview" hidden>← 이전</button><span id="previewCounter"></span><button id="nextPreview" hidden>다음 →</button></div><div class="preview-tabs"><button id="showResult" class="active">워터마크 적용</button><button id="showOriginal">원본 보기</button></div><div class="preview-image-wrap"><canvas id="resultCanvas"></canvas></div><div class="preview-footer"><span id="previewFileName"></span><button id="previewDownload" class="primary">이 이미지 다운로드</button></div></div></div><div id="mobileSaveModal" class="mobile-save-modal" hidden><div class="mobile-save-panel"><div class="preview-head"><strong>사진 저장하기</strong><button id="closeMobileSave" aria-label="닫기">✕</button></div><p>아래 완성된 사진을 길게 누른 뒤 ‘사진에 저장’ 또는 ‘이미지 저장’을 선택하세요. 길게 누르기가 안 되면 ‘공유 메뉴 열기’나 ‘파일로 다운로드’를 이용할 수 있습니다.</p><div id="mobileBatchNav" class="mobile-batch-nav" hidden><button id="mobileBatchPrev" type="button">← 이전 사진</button><span id="mobileBatchCounter" aria-live="polite"></span><button id="mobileBatchNext" type="button">다음 사진 →</button></div><img id="mobileSaveImage" alt="저장할 이미지" draggable="false"><div class="mobile-save-actions"><button id="mobileSaveDownload">파일로 다운로드</button><button id="mobileSaveShare" class="primary">공유 메뉴 열기</button></div></div></div><div id="batchSelectModal" class="batch-select-modal" hidden><div class="batch-select-panel" role="dialog" aria-modal="true" aria-label="저장할 이미지 선택"><div class="batch-select-head"><strong>저장할 사진 선택</strong><button id="batchSelectClose" type="button" aria-label="닫기">✕</button></div><div class="batch-select-tools"><label><input id="batchSelectAll" type="checkbox" checked> 전체 선택</label><span id="batchSelectedCount">0장 선택됨</span></div><div id="batchSelectGrid" class="batch-select-grid"></div><div class="batch-select-footer"><button id="batchZipSave" type="button" class="primary">선택한 사진 ZIP 저장</button><button id="batchMobileSave" type="button">사진 준비 중…</button></div><p id="batchShareStatus" class="hint" style="padding:0 16px 14px;display:none" aria-live="polite"></p></div></div></div><div id="toast"></div><script>
 const $=id=>document.getElementById(id);let images=[],selected=0,mode='single',logo=null,dragging=false;let settings={type:'text',text:'© MY PHOTO',font:'Arial',color:'#ffffff',size:30,opacity:100,rotation:0,position:4,margin:4,format:'image/jpeg',suffix:true,antiTheft:false};const positions=['↖','↑','↗','←','●','→','↙','↓','↘'];function toast(s){$('toast').textContent=s;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2800)}function readImage(file){return new Promise((res,rej)=>{let url=URL.createObjectURL(file),im=new Image();im.onload=()=>res({file,url,im,offset:null});im.onerror=()=>{URL.revokeObjectURL(url);rej(Error('이미지를 읽을 수 없습니다'))};im.src=url})}async function addFiles(files){let added=0;for(const f of files){if(!f.type.startsWith('image/'))continue;try{images.push(await readImage(f));added++}catch(e){toast(f.name+' 파일을 열지 못했습니다')}}if(added)selected=images.length-added;renderList();render()}$('fileInput').onchange=e=>{addFiles([...e.target.files]);e.target.value=''};['addBtn'].forEach(id=>$(id).onclick=()=>$('fileInput').click());$('chooseLogo').onclick=()=>$('logoInput').click();$('logoInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{let obj=await readImage(f);if(logo)URL.revokeObjectURL(logo.url);logo=obj;$('logoName').textContent=f.name;render()}catch(e){toast('로고를 읽을 수 없습니다')}};function renderList(){ $('count').textContent=images.length;if($('downloadAllCount'))$('downloadAllCount').textContent='('+images.length+'장)';for(const target of ['thumbs','mobileThumbs']){$(target).innerHTML='';images.forEach((item,i)=>{let b=document.createElement('button');b.className='thumb'+(selected===i?' active':'');let im=document.createElement('img');im.src=item.url;let span=document.createElement('span');span.textContent=item.file.name;b.append(im,span);b.onclick=()=>{selected=i;renderList();render()};$(target).append(b)})} }$('removeBtn').onclick=()=>{if(!images.length)return;URL.revokeObjectURL(images[selected].url);images.splice(selected,1);selected=Math.max(0,Math.min(selected,images.length-1));renderList();render()};function placement(w,h,markW,markH,offset){if(offset)return {x:offset.x*w,y:offset.y*h};const col=settings.position%3,row=Math.floor(settings.position/3),margin=settings.margin/100;return{x:col===0?w*margin+markW/2:col===1?w/2:w*(1-margin)-markW/2,y:row===0?h*margin+markH/2:row===1?h/2:h*(1-margin)-markH/2}}function draw(canvas,item){const w=item.im.naturalWidth,h=item.im.naturalHeight;canvas.width=w;canvas.height=h;let ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);ctx.drawImage(item.im,0,0,w,h);let targetW=w*settings.size/100;ctx.save();ctx.globalAlpha=settings.opacity/100;let mw,mh;if(settings.type==='logo'){if(!logo){ctx.restore();return}mw=targetW;mh=mw*logo.im.naturalHeight/logo.im.naturalWidth}else{ctx.font=`bold ${Math.max(8,targetW/Math.max(1,settings.text.length)*1.6)}px ${settings.font}`;mw=ctx.measureText(settings.text).width;let factor=targetW/Math.max(mw,1);ctx.font=`bold ${Math.max(8,parseFloat(ctx.font.match(/[\d.]+px/)?.[0]||'16')*factor)}px ${settings.font}`;mw=ctx.measureText(settings.text).width;mh=parseFloat(ctx.font.match(/[\d.]+px/)?.[0]||'16')}let p=placement(w,h,mw,mh,item.offset);ctx.translate(p.x,p.y);ctx.rotate(settings.rotation*Math.PI/180);if(settings.type==='logo')ctx.drawImage(logo.im,-mw/2,-mh/2,mw,mh);else{ctx.fillStyle=settings.color;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(settings.text,0,0)}ctx.restore();
 if(settings.type==='text'&&settings.antiTheft&&settings.text.trim()){
  const c=canvas.getContext('2d');c.save();c.clearRect(0,0,w,h);c.drawImage(item.im,0,0,w,h);c.globalAlpha=settings.opacity/100;c.fillStyle=settings.color;c.textAlign='center';c.textBaseline='middle';
@@ -228,7 +410,7 @@ $('clearWatermarkBtn').onclick=()=>{images.forEach(item=>URL.revokeObjectURL(ite
 $('combineAdd').onclick=()=>$('combineFileInput').click();
 $('combineFileInput').onchange=async e=>{const files=[...e.target.files];e.target.value='';for(const f of files){if(!f.type.startsWith('image/'))continue;try{combineFiles.push(await readImage(f))}catch(err){toast('읽기 실패: '+f.name)}}renderCombine()};
 function combineReorder(from,to){if(to<0||to>=combineFiles.length)return;const [item]=combineFiles.splice(from,1);combineFiles.splice(to,0,item);activeCrop=to;renderCombine()}
-function renderCombineList(){const root=$('combineItems');root.replaceChildren();combineFiles.forEach((item,i)=>{const el=document.createElement('div');el.className='combine-item'+(i===activeCrop?' active':'');const img=document.createElement('img');img.src=item.url;img.alt='사진 '+(i+1);const name=document.createElement('span');name.textContent=item.file.name;name.title=item.file.name;el.append(img,name);img.onclick=()=>{activeCrop=i;renderCombine()};for(const [txt,fn] of [['←',()=>combineReorder(i,i-1)],['→',()=>combineReorder(i,i+1)],['×',()=>{URL.revokeObjectURL(item.url);combineFiles.splice(i,1);activeCrop=clamp(activeCrop,combineFiles.length?0:-1,combineFiles.length-1);renderCombine()}]]){const b=document.createElement('button');b.textContent=txt;b.onclick=fn;el.append(b)}root.append(el)})}
+function renderCombineList(){const root=$('combineItems');root.replaceChildren();combineFiles.forEach((item,i)=>{const el=document.createElement('div');el.className='combine-item'+(i===activeCrop?' active':'');const img=document.createElement('img');img.src=item.url;img.alt='사진 '+(i+1);el.append(img);el.setAttribute('aria-label','이미지 '+(i+1)+' 선택');el.onclick=()=>{activeCrop=i;renderCombine()};for(const [txt,fn,disabled] of [['←',()=>combineReorder(i,i-1),i===0],['→',()=>combineReorder(i,i+1),i===combineFiles.length-1]]){const b=document.createElement('button');b.type='button';b.textContent=txt;b.disabled=disabled;b.setAttribute('aria-label',txt==='←'?'앞으로 이동':'뒤로 이동');b.onclick=e=>{e.stopPropagation();fn()};el.append(b)}root.append(el)})}
 function setCombineCategory(cat){combineCategory=cat;for(const c of ['Basic','Grid','Brick']){$('combineCategory'+c).classList.toggle('active',c.toLowerCase()===cat);$('combine'+c+'Options').hidden=c.toLowerCase()!==cat}activeCrop=-1;renderCombine()}
 for(const c of ['Basic','Grid','Brick'])$('combineCategory'+c).onclick=()=>setCombineCategory(c.toLowerCase());
 function splitBrick(count,preset){
@@ -306,6 +488,27 @@ function combineCanvasPoint(e){const r=combineCanvas.getBoundingClientRect();con
 combineCanvas.addEventListener('pointerdown',e=>{if(!combineLayout)return;const p=combineCanvasPoint(e);let hit=-1;combineLayout.rects.forEach((r,i)=>{if(p.x>=r.x&&p.x<=r.x+r.w&&p.y>=r.y&&p.y<=r.y+r.h)hit=i});if(hit<0)return;activeCrop=hit;const f=combineFiles[hit];cropDrag={x:p.x,y:p.y,px:f.cropX??.5,py:f.cropY??.5,index:hit};combineCanvas.setPointerCapture(e.pointerId);renderCombine()});
 combineCanvas.addEventListener('pointermove',e=>{if(!cropDrag||!combineLayout)return;const p=combineCanvasPoint(e),r=combineLayout.rects[cropDrag.index],f=combineFiles[cropDrag.index];if(!r||!f)return;const factor=Math.max(r.w/f.im.naturalWidth,r.h/f.im.naturalHeight)*(f.cropZoom||1);const extraX=Math.max(0,f.im.naturalWidth*factor-r.w),extraY=Math.max(0,f.im.naturalHeight*factor-r.h);f.cropX=extraX?clamp(cropDrag.px-(p.x-cropDrag.x)/extraX,0,1):.5;f.cropY=extraY?clamp(cropDrag.py-(p.y-cropDrag.y)/extraY,0,1):.5;renderCombine()});
 for(const ev of ['pointerup','pointercancel','lostpointercapture'])combineCanvas.addEventListener(ev,()=>cropDrag=null);
+
+// Composer detail modal: edit the selected crop without changing the output geometry.
+const detailModal=$('combineDetailModal'),detailCanvas=$('detailCanvas');
+let detailIndex=-1,detailBefore=null,detailPointers=new Map(),detailGesture=null;
+function detailItem(){return combineFiles[detailIndex]}
+function detailSync(){const f=detailItem();if(!f)return;for(const [id,val] of [['detailZoom',Math.round((f.cropZoom||1)*100)],['detailX',Math.round((f.cropX??.5)*100)],['detailY',Math.round((f.cropY??.5)*100)]]){$(id).value=val;$(id+'Out').textContent=val+'%'}}
+function detailDraw(){const f=detailItem(),layout=getCombineRects();if(!f||!layout)return;const r=layout.rects[detailIndex];if(!r)return;const max=1100,scale=Math.min(1,max/Math.max(r.w,r.h));const w=Math.max(1,Math.round(r.w*scale)),h=Math.max(1,Math.round(r.h*scale));detailCanvas.width=w;detailCanvas.height=h;const ctx=detailCanvas.getContext('2d');ctx.fillStyle=$('combineBackground').value;ctx.fillRect(0,0,w,h);const factor=Math.max(w/f.im.naturalWidth,h/f.im.naturalHeight)*(f.cropZoom||1),dw=f.im.naturalWidth*factor,dh=f.im.naturalHeight*factor;ctx.drawImage(f.im,-(dw-w)*(f.cropX??.5),-(dh-h)*(f.cropY??.5),dw,dh)}
+function detailRefresh(){detailSync();detailDraw();renderCombine()}
+function detailClose(apply=true){if(!apply&&detailBefore&&detailItem())Object.assign(detailItem(),detailBefore);detailPointers.clear();detailGesture=null;detailModal.hidden=true;document.body.style.overflow='';renderCombine()}
+$('openCombineDetail').onclick=()=>{if(!combineFiles.length)return toast('먼저 이미지를 추가해 주세요');detailIndex=activeCrop>=0&&activeCrop<combineFiles.length?activeCrop:0;activeCrop=detailIndex;const f=detailItem();detailBefore={cropZoom:f.cropZoom||1,cropX:f.cropX??.5,cropY:f.cropY??.5};$('detailFileName').textContent='· '+f.file.name;detailModal.hidden=false;document.body.style.overflow='hidden';detailRefresh()};
+$('closeCombineDetail').onclick=()=>detailClose(false);$('detailDone').onclick=()=>detailClose(true);$('detailReset').onclick=()=>{const f=detailItem();if(!f)return;f.cropZoom=1;f.cropX=.5;f.cropY=.5;detailRefresh()};
+for(const [id,field] of [['detailZoom','cropZoom'],['detailX','cropX'],['detailY','cropY']])$(id).addEventListener('input',e=>{const f=detailItem();if(!f)return;f[field]=+e.target.value/100;detailRefresh()});
+function detailPoint(e){const b=detailCanvas.getBoundingClientRect();return{x:(e.clientX-b.left)*detailCanvas.width/b.width,y:(e.clientY-b.top)*detailCanvas.height/b.height}}
+function detailBegin(){const f=detailItem();if(!f)return;const pts=[...detailPointers.values()];if(!pts.length)return;const mid=pts.length>=2?{x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2}:pts[0];detailGesture={mid,dist:pts.length>=2?Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y):0,zoom:f.cropZoom||1,x:f.cropX??.5,y:f.cropY??.5};}
+detailCanvas.addEventListener('pointerdown',e=>{if(detailModal.hidden)return;e.preventDefault();detailCanvas.setPointerCapture(e.pointerId);detailPointers.set(e.pointerId,detailPoint(e));detailBegin()});
+detailCanvas.addEventListener('pointermove',e=>{if(!detailPointers.has(e.pointerId)||!detailGesture)return;e.preventDefault();detailPointers.set(e.pointerId,detailPoint(e));const f=detailItem(),pts=[...detailPointers.values()],g=detailGesture;if(!f)return;const mid=pts.length>=2?{x:(pts[0].x+pts[1].x)/2,y:(pts[0].y+pts[1].y)/2}:pts[0];const zoom=pts.length>=2&&g.dist>0?clamp(g.zoom*Math.hypot(pts[0].x-pts[1].x,pts[0].y-pts[1].y)/g.dist,1,3):g.zoom;f.cropZoom=zoom;const iw=f.im.naturalWidth,ih=f.im.naturalHeight,w=detailCanvas.width,h=detailCanvas.height,factor=Math.max(w/iw,h/ih)*zoom,extraX=Math.max(0,iw*factor-w),extraY=Math.max(0,ih*factor-h);f.cropX=extraX?clamp(g.x-(mid.x-g.mid.x)/extraX,0,1):.5;f.cropY=extraY?clamp(g.y-(mid.y-g.mid.y)/extraY,0,1):.5;detailRefresh()});
+for(const ev of ['pointerup','pointercancel','lostpointercapture'])detailCanvas.addEventListener(ev,e=>{detailPointers.delete(e.pointerId);detailBegin()});
+detailModal.addEventListener('click',e=>{if(e.target===detailModal)detailClose(false)});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!detailModal.hidden)detailClose(false)});
+
+$('combineRemove').onclick=()=>{if(activeCrop<0||!combineFiles[activeCrop]){toast('삭제할 이미지를 선택해 주세요.');return}const item=combineFiles.splice(activeCrop,1)[0];URL.revokeObjectURL(item.url);activeCrop=combineFiles.length?Math.min(activeCrop,combineFiles.length-1):-1;renderCombine()};
 $('combineClear').onclick=()=>{combineFiles.forEach(f=>URL.revokeObjectURL(f.url));combineFiles.length=0;activeCrop=-1;renderCombine()};
 function combinedCanvas(){if(!combineOutputValid)throw Error('먼저 이미지를 추가하고 레이아웃을 확인해 주세요');const c=document.createElement('canvas');renderComposite(c,false);return c}
 function canvasToBlob(canvas,type){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error('이미지 저장에 실패했습니다')),type,.95))}
@@ -313,5 +516,50 @@ $('combineDownload').onclick=async()=>{const b=$('combineDownload');b.disabled=t
 $('combineToWatermark').onclick=async()=>{const b=$('combineToWatermark');b.disabled=true;try{const canvas=combinedCanvas();const blob=await canvasToBlob(canvas,'image/png');const file=new File([blob],'combined_image.png',{type:'image/png'});const item=await readImage(file);images.forEach(f=>URL.revokeObjectURL(f.url));images=[item];selected=0;renderList();setWorkspace('watermark');render();requestAnimationFrame(()=>{window.scrollTo(0,0);document.querySelectorAll('#watermarkWorkspace aside,#watermarkWorkspace main,#watermarkWorkspace .stage').forEach(el=>el.scrollTop=0)});toast('합친 이미지를 워터마크 편집기로 불러왔습니다')}catch(err){toast(err.message)}finally{b.disabled=false}};
 // Avoid accidental global drop into watermark editor while composing.
 document.addEventListener('drop',e=>{if(!$('combineWorkspace').hidden){e.stopImmediatePropagation();e.preventDefault();const files=[...e.dataTransfer.files].filter(f=>f.type.startsWith('image/'));(async()=>{for(const f of files){try{combineFiles.push(await readImage(f))}catch{toast('읽기 실패: '+f.name)}}renderCombine()})()}},true);
+// Show the mobile save bar only after the user has scrolled down.
+(function(){
+  const update=()=>{
+    const mobile=window.matchMedia('(max-width:767px)').matches;
+    const active=!document.getElementById('watermarkWorkspace').hidden;
+    document.body.classList.toggle('watermark-scrolled',mobile&&active&&window.scrollY>160);
+    document.body.classList.toggle('combine-scrolled',mobile&&!active&&window.scrollY>160);
+  };
+  window.addEventListener('scroll',update,{passive:true});
+  window.addEventListener('resize',update,{passive:true});
+  document.getElementById('watermarkTab').addEventListener('click',()=>requestAnimationFrame(update));
+  document.getElementById('combineTab').addEventListener('click',()=>requestAnimationFrame(update));
+  update();
+})();
 setWorkspace('watermark');renderCombine();
+
+/* Keep the actual preview in view: shrink the original stage instead of opening a second preview. */
+(function(){
+ const pairs=[{workspace:'watermarkWorkspace',stage:document.getElementById('stage'),canvas:document.getElementById('preview')},{workspace:'combineWorkspace',stage:document.querySelector('.combine-stage'),canvas:document.getElementById('combineCanvas')}];
+ let scheduled=false;
+ for(const p of pairs){
+   const marker=document.createElement('div');marker.className='stage-sticky-placeholder';marker.hidden=true;
+   p.stage.parentNode.insertBefore(marker,p.stage);p.marker=marker;
+ }
+ function update(){
+   scheduled=false;
+   const mobile=window.matchMedia('(max-width:767px)').matches;
+   const modalOpen=[...document.querySelectorAll('.detail-overlay,.batch-select-modal,.preview-modal,.mobile-save-modal')].some(el=>!el.hidden);
+   for(const p of pairs){
+     const active=mobile&&!document.getElementById(p.workspace).hidden&&!p.canvas.hidden&&!modalOpen && !(p.workspace==='combineWorkspace' && combineCategory==='basic');
+     if(!active){p.stage.classList.remove('compact-sticky-stage');p.marker.hidden=true;continue}
+     // The marker preserves the original stage position while the real stage is docked.
+     const shouldStick=(p.stage.classList.contains('compact-sticky-stage')?p.marker:p.stage).getBoundingClientRect().top<0;
+     if(shouldStick){
+       if(p.marker.hidden){p.marker.style.height='0px';p.marker.hidden=false}
+       p.stage.classList.add('compact-sticky-stage');
+     }else{p.stage.classList.remove('compact-sticky-stage');p.marker.hidden=true}
+   }
+ }
+ function schedule(){if(!scheduled){scheduled=true;requestAnimationFrame(update)}}
+ window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule,{passive:true});
+ document.getElementById('watermarkTab').addEventListener('click',schedule);
+ document.getElementById('combineTab').addEventListener('click',schedule);
+ document.addEventListener('click',schedule);
+ update();
+})();
 </script></body></html>
